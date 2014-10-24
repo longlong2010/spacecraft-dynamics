@@ -41,8 +41,8 @@ function y = elements(r, v)
 
 	y(1) = a;
 	y(2) = le;
-	y(3) = Omiga * 180 / pi;
-	y(4) = omiga * 180 / pi;
-	y(5) = i * 180 / pi;
+	y(3) = i * 180 / pi;
+	y(4) = Omiga * 180 / pi;
+	y(5) = omiga * 180 / pi;
 	y(6) = theta * 180 / pi;
 end

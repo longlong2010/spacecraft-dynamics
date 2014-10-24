@@ -30,7 +30,7 @@ ydot(3) = 1 / (n * a * sqrt(1 - e^2)) * (lr / a) * cos(theta + omiga) * W;
 %Omiga
 ydot(4) = 1 / (n * a * sqrt(1 - e^2)) * (lr / a) * (sin(theta + omiga) / sin(i)) * W;
 %omiga
-ydot(5) = sqrt(1 - e^2) / (n * a * e) * (-R * cos(theta) + (1 + 1 / (1 + e * cos(theta))) * sin(theta) * S) - ydot(4) * cos(i) * W;
+ydot(5) = sqrt(1 - e^2) / (n * a * e) * (-R * cos(theta) + (1 + 1 / (1 + e * cos(theta))) * sin(theta) * S) - ydot(4) * cos(i);
 %M
-ydot(6) = n + (1 - e^2) / (n * a * e) * ((-2 * e / (1 + e * cos(theta)) + cos(theta)) * R - (1 + 1 / (1 + e * cos(theta)) * sin(theta) * S));
+ydot(6) = n + (1 - e^2) / (n * a * e) * ((-2 * e / (1 + e * cos(theta)) + cos(theta)) * R - (1 + 1 / (1 + e * cos(theta))) * sin(theta) * S);
 end
