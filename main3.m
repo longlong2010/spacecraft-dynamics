@@ -4,7 +4,7 @@ clc
 
 mu = 398601;
 
-%
+%1-a 1-b
 a = 10000;
 e = 0.2;
 i = 20;
@@ -17,6 +17,7 @@ s = elementsdotj2(a, e, i);
 Omigadot = s(1)
 omigadot = s(2)
 
+%1-c
 s = rv(a, e, i, Omiga, omiga, theta);
 r0 = s(7:9);
 v0 = s(10:12);
@@ -45,6 +46,7 @@ for k = 1:5
 	plot(t, orbit_elements(:,k));
 end
 
+%1-d
 M = 2 * atan(sqrt((1 - e)/(1 + e)) * tan(theta * pi / 360)) - e * sqrt(1 - e^2) * sin(theta * pi / 180) / (1 + e * cos(theta * pi / 180));
 M * 180 / pi
 y0 = [a; e; i * pi / 180; Omiga * pi / 180; omiga * pi / 180; M];
@@ -64,9 +66,10 @@ for k = 1:5
 	plot(t, y(:,k));
 end
 
+%2
 j2 = 1.0826e-3;
 Re = 6378.14;
 e = 0;
 a = 860 + Re;
-i = acos((2 * pi / (365 * 86400 + 6 * 3600 + 9 * 60 + 10)) * (2 / 3) * (1 - e^2)^2 * a^(7 / 2) / (sqrt(mu) * j2 * Re^2)) / pi * 180;
+i = acos(-(2 * pi / (365 * 86400 + 6 * 3600 + 9 * 60 + 10)) * (2 / 3) * (1 - e^2)^2 * a^(7 / 2) / (sqrt(mu) * j2 * Re^2)) / pi * 180;
 i
