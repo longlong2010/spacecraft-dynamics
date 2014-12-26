@@ -1,4 +1,4 @@
-function xdot = euler6(t, x, flag, I, omiga0, b)
+function xdot = ode61(t, x, flag, I, omiga0, b)
 	xdot = zeros(3, 1);
 
 	omigaw = x(1);

@@ -1,4 +1,4 @@
-function xdot = eom6(t, x, flag, I, omiga0, K, Kd, Qt)
+function xdot = ode62(t, x, flag, I, omiga0, K, Kd, Qt)
 	xdot = zeros(10, 1);
 	omigadot = zeros(3, 1);
 	qdot = zeros(4, 1);
@@ -22,15 +22,9 @@ function xdot = eom6(t, x, flag, I, omiga0, K, Kd, Qt)
 
 	qdot = 0.5 * Omiga * q;
 	
-	Q = [0 -q(3) q(2);
-		 q(3) 0 -q(1);
-		 -q(2) q(1) 0;
-		];
-	
 	qe = Qt * [-q(1); -q(2); -q(3); q(4)];
 
-	A = (q(4)^2 - q(1:3)' * q(1:3)) * [1 0 0; 0 1 0; 0 0 1] + 2 * q(1:3) * q(1:3)' - 2 * q(4) * Q;
-
+	A = q2cosine(q);
 	omiga_ri = A * [0; -omiga0; 0];
 	omiga_br = omiga - omiga_ri;
 
@@ -40,9 +34,7 @@ function xdot = eom6(t, x, flag, I, omiga0, K, Kd, Qt)
 		M = Tc;
 	end
 
-	omigadot(1) = (M(1) + (I(2) - I(3)) * omiga(2) * omiga(3)) / I(1);
-	omigadot(2) = (M(2) + (I(3) - I(1)) * omiga(1) * omiga(3)) / I(2);
-	omigadot(3) = (M(3) + (I(1) - I(2)) * omiga(1) * omiga(2)) / I(3);
+	omigadot = eulereq(omiga, I, M);
 
 	xdot(1:3) = omigadot;
 	xdot(4:7) = qdot;
