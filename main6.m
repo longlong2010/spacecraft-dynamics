@@ -22,7 +22,7 @@ omiga0 = sqrt(mu / (Re + ha)^3);
 T = 2 * pi / omiga0;
 
 I = zeros(4, 1);
-I(1) = (1 / 12) * m * h^2 + m * d1^2 + (1 / 12) * M * H^2 + M * d2^2;
+I(1) = (1 / 12) * m * h^2 + (1 / 4) * m * r^2 + m * d1^2 + (1 / 12) * M * H^2 + (1 / 4) * M * R^2 + M * d2^2;
 I(2) = I(1);
 I(3) = (1 / 2) * m * r^2 + (1 / 2) * M * R^2;
 I(4) = 0.8;
@@ -33,22 +33,13 @@ y = 10 * cos(omiga0 * sqrt(3 * (I(1) - I(3)) / I(2)) * t);
 figure(1);
 plot(t, y);
 
-
 b = 0.002;
 
 x0 = [0; 10 / 180 * pi; 0];
 
-tspan = [0 880];
-options = odeset('RelTol', 1e-8, 'AbsTol', 1e-8);
+tspan = [0 3000 * T];
+options = odeset('RelTol', 1e-6, 'AbsTol', 1e-6);
 [t, y] = ode45('ode61', tspan, x0, options, I, omiga0, b);
-tn = 0;
-for i = 1:length(y(:, 2))
-	if y(i, 2) < 1 * pi / 180
-		tn = t(i);
-		break;
-	end
-end
-n = tn / T;
 
 %6.1.2
 figure(2);
