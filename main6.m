@@ -27,6 +27,7 @@ I(2) = I(1);
 I(3) = (1 / 2) * m * r^2 + (1 / 2) * M * R^2;
 I(4) = 0.8;
 
+%6.1.1
 t = 0:0.1:T;
 y = 10 * cos(omiga0 * sqrt(3 * (I(1) - I(3)) / I(2)) * t);
 figure(1);
@@ -49,6 +50,7 @@ for i = 1:length(y(:, 2))
 end
 n = tn / T;
 
+%6.1.2
 figure(2);
 plot(t, y(:, 2) * 180 / pi);
 
@@ -81,6 +83,7 @@ Qt = [
 ];
 
 x0 = zeros(10, 1);
+x0(2) = -omiga0;
 x0(7) = 1;
 
 tspan = [0 15];
@@ -103,12 +106,14 @@ for i = 1:length(y)
 end
 
 hold on;
+%euler angle
 figure(3);
 plot(t, y(:, 8) * 180 / pi);
 figure(4);
 plot(t, y(:, 9) * 180 / pi);
 figure(5);
 plot(t, y(:, 10) * 180 / pi);
+%q
 figure(6);
 plot(t, y(:, 4));
 figure(7);
@@ -117,6 +122,7 @@ figure(8);
 plot(t, y(:, 6));
 figure(9);
 plot(t, y(:, 7));
+%Tc
 figure(10);
 plot(t, Tc(:, 1));
 figure(11);
