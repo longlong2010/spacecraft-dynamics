@@ -1,7 +1,7 @@
 clear all
 close all
 clc
-
+%2.1
 e = 0.7;
 M = 1.5;
 psi = kepler(e, M);
@@ -9,33 +9,35 @@ psi
 
 mu = 398600;
 e = 0.08;
+
 T = 2 * pi / sqrt(mu) * 7580 ^ (3 / 2);
-M = 2 * pi * 45 * 60 / T;
-psi = kepler(e, M);
-psi
+n = 2 * pi / T;
 
 
-%theta = 2 * atan(sqrt((1 + e) / (1 - e)) * tan(psi / 2));
-
-s = rv(7580, 0.08, 7.5, 56.4, 22.5, 60.2);
-rpqw = s(1:3);
+theta0 = 60.2;
+x = rv(7580, 0.08, 7.5, 56.4, 22.5, theta0);
+rpqw = x(1:3);
 rpqw
-vpqw = s(4:6);
+vpqw = x(4:6);
 vpqw
 
-r = s(7:9);
+r = x(7:9);
 r
-v = s(10:12);
+v = x(10:12);
 v
 
+%2.3
+M0 = theta2M(e, theta0)
+M1 = M0 + n * 45 * 60;
+theta1 = M2theta(e, M1);
 
-r = [5027.675; 4218.720; 0];
-v = [-5.79133; 6.90184; 4.89187];
-s = elements(r, v);
-t = tof(s(1), s(2), s(1) * (1 + s(2)));
-t
+x = rv(7580, 0.08, 7.5, 56.4, 22.5, theta1);
+rpqw = x(1:3);
+rpqw
+vpqw = x(4:6);
+vpqw
 
-
-s1 = rv(s(1), s(2), s(3), s(4), s(5), s(6));
-rpqw = s1(1:3);
-vpqw = s1(4:6);
+r = x(7:9);
+r
+v = x(10:12);
+v
