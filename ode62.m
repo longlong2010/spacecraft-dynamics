@@ -13,14 +13,6 @@ function xdot = ode62(t, x, flag, I, omiga0, K, Kd, Qt)
 	theta = x(9);
 	psi = x(10);
 
-	Omiga = [
-		0 omiga(3) -omiga(2) omiga(1);
-		-omiga(3) 0 omiga(1) omiga(2);
-		omiga(2) -omiga(1) 0 omiga(3);
-		-omiga(1) -omiga(2) -omiga(3) 0;
-	];
-
-	qdot = 0.5 * Omiga * q;
 	
 	qe = Qt * [-q(1); -q(2); -q(3); q(4)];
 
@@ -28,6 +20,14 @@ function xdot = ode62(t, x, flag, I, omiga0, K, Kd, Qt)
 	omiga_ri = A * [0; -omiga0; 0];
 	omiga_br = omiga - omiga_ri;
 
+	Omiga = [
+		0 omiga_br(3) -omiga_br(2) omiga_br(1);
+		-omiga_br(3) 0 omiga_br(1) omiga_br(2);
+		omiga_br(2) -omiga_br(1) 0 omiga_br(3);
+		-omiga_br(1) -omiga_br(2) -omiga_br(3) 0;
+	];
+
+	qdot = 0.5 * Omiga * q;
 	Tc = 2 * K .* qe(1:3) * qe(4) + Kd .* omiga_br;
 
 	if t > 1
